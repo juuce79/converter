@@ -1,6 +1,6 @@
-from model import ConversionModel
-from convert_currency import CurrencyConverter
-from convert_length import LengthConverter
+from model.model import ConversionModel
+from model.converters.convert_currency import CurrencyConverter
+from model.converters.convert_length import LengthConverter
 
 
 class ConversionController:

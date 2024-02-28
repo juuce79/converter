@@ -1,7 +1,7 @@
 import unittest
 import inspect
 
-from convert_length import LengthConverter
+from model.converters.convert_length import LengthConverter
 
 
 class LengthConversionTests(unittest.TestCase):

@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from controller import ConversionController
+from controller.controller import ConversionController
 
 
 def main():
