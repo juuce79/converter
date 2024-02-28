@@ -47,6 +47,22 @@ class ConversionModel:
             else:
                 print("Conversion failed. Check if units are valid.")
 
+    def handle_command_line_currency_conversion(self, args):
+        result = self.perform_currency_conversion(args.from_unit, args.to_unit, args.amount)
+        if result:
+            print(f"{args.amount} {args.from_unit} is equal to {result} {args.to_unit}")
+        else:
+            print("Conversion failed. Check if currencies are valid.")
+
+    def handle_command_line_length_conversion(self, args):
+        result = self.perform_length_conversion(args.from_unit, args.to_unit, args.amount)
+        if result:
+            rounded_result = self.round_to_nearest_nonzero(result)
+            rounded_value = self.round_to_nearest_nonzero(args.amount)
+            print(f"{rounded_value} {args.from_unit} is equal to {rounded_result} {args.to_unit}")
+        else:
+            print("Conversion failed. Check if units are valid.")
+
     @staticmethod
     def currency_conversion_loop(currency_converter):
         while True:  # Conversion loop

@@ -15,7 +15,7 @@ def main():
 
         args = parser.parse_args()
 
-        conversion_controller.handle_command_line_conversion(args)
+        conversion_controller.handle_command_line_mode(args)
     else:
         conversion_controller.handle_interactive_mode()
 
