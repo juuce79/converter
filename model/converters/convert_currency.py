@@ -2,6 +2,8 @@ import urllib.request  # Standard library module for working with URLs
 import urllib.error  # Used for managing errors during web requests
 import json  # Standard library module for working with JSON data
 
+from model.converters.custom_error_handling.currency_errors import InvalidCurrencyError
+
 
 class CurrencyConverter:
     """
@@ -35,8 +37,11 @@ class CurrencyConverter:
                 return from_to_rate  # Return the extracted rate
 
         except urllib.error.URLError as e:  # Exception handling for URL errors
-            print(f"Error fetching data: {e}")  # Print the error message
-            return None  # Return None on error
+            if e.code == 403:  # Check for the 403 error code
+                raise InvalidCurrencyError(f"Invalid currency code(s): {from_currency}, {to_currency}")
+            else:
+                print(f"Error fetching data: {e}")
+                return None
 
     def convert_currency(self, from_currency, to_currency, amount):
         """
@@ -52,4 +57,4 @@ class CurrencyConverter:
             converted_amount = rate * amount  # Calculate the converted amount
             return converted_amount  # Return the converted amount
         else:  # Handle the case where no exchange rate is available
-            return None  # Indicate conversion failure
+            raise InvalidCurrencyError(f"Invalid currency code(s): {from_currency}, {to_currency}")
